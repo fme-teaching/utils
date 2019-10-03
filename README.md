@@ -1,12 +1,14 @@
 # Utilities developed by the FM Teaching Committee
 
-This repository contains datasets and tools developed to assist the FM Teaching Committee.
+This repository contains datasets and tools developed to assist the FM Teaching Committee. Most of the tools are very specific,
+making them useful for internal use only.
 
 ## Tools
 
-| Tool              | Description                                                                                                              |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| update-fm-courses | Python script used to create the `json` data file used by the [courses database](https://fme-teaching.github.io/courses) |
+| Tool                | Description                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `update_fm_courses` | Python script used to create the `json` data file used by the [courses database](https://fme-teaching.github.io/courses) |
+| `create_labels`     | Python script used to create Github labels from a `json` file of countries                                               |
 
 
 ## Datasets
