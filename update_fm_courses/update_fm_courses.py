@@ -109,11 +109,16 @@ def create_list_courses(courses_repo, fme_github_key):
                 if len(webpage) > 0 and webpage[-1] == '/':
                     course['course_webpage'] = webpage[:-1]
 
-            # Remove email address from contact. TODO: confirm
+            # Remove email address from contact.
             if 'course_contact' in course:
-                contact = course['course_contact']
-                contact = contact.split(',')[0]
-                course['course_contact'] = contact
+                contact = course['course_contact'].split(',')
+                if len(contact) > 1:
+                    contact_name, contact_email = contact
+                    if (PRINT_EMAILS):
+                        print(contact_email.strip())
+                else:
+                    contact_name = contact[0]
+                course['course_contact'] = contact_name
 
             courses.append(course.copy())
 
@@ -147,6 +152,8 @@ def list_of_countries(list_courses):
 
 
 # Driver code below
+
+PRINT_EMAILS = False
 
 courses = create_list_courses(courses_repo, fme_github_key)
 courses_json = json.dumps(courses, indent=4)
