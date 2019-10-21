@@ -1,5 +1,6 @@
 from github import Github
 import json
+import re  # for validating URLs
 
 # For this to work, you need to provide an API key
 # (in a file fme_github_keys.py and var fme_github_key)
@@ -61,6 +62,17 @@ def standardise_keyword(word):
     return new_word
 
 
+def is_valid_url(url):
+    regex = re.compile(
+      r'^(?:http|ftp)s?://'  # http:// or https://
+      r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
+      r'localhost|'  # localhost...
+      r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or ip
+      r'(?::\d+)?'  # optional port
+      r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+    return re.match(regex, url) is not None
+
+
 def create_list_courses(courses_repo, fme_github_key):
     # Create access based on the key provided
     g = Github(fme_github_key)
@@ -105,9 +117,14 @@ def create_list_courses(courses_repo, fme_github_key):
             if 'course_webpage' not in course:
                 course['course_webpage'] = "#"
             else:
+                course['course_webpage'] = \
+                    course['course_webpage'].split(' ')[0]
                 webpage = course['course_webpage']
-                if len(webpage) > 0 and webpage[-1] == '/':
-                    course['course_webpage'] = webpage[:-1]
+                if is_valid_url(webpage):
+                    if len(webpage) > 0 and webpage[-1] == '/':
+                        course['course_webpage'] = webpage[:-1]
+                else:
+                    course['course_webpage'] = "#"
 
             # Remove email address from contact.
             if 'course_contact' in course:
