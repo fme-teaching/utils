@@ -21,7 +21,8 @@ def map_to_keys(field):
          'concepts taught': 'course_concepts',
          'tools used': 'course_tools',
          'webpage': 'course_webpage',
-         'year/level': 'course_year_level'
+         'year/level': 'course_year_level',
+         'reviewed': 'reviewed'
          }
     if field not in d:
         d[field] = ''
