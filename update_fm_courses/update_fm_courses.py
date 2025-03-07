@@ -45,7 +45,8 @@ def process_issue_body(issue_body):
 
     # We first create a list with elements of type (name, [[key, value]])
     flist = filter(lambda f: len(f) == 2,
-                   map(lambda f: f.split(': '), issue_body.split('\r\n')))
+                   #map(lambda f: f.split(': '), issue_body.split('\r\n')))
+                   map(lambda f: f.split(': '), issue_body.splitlines()))
 
     # We now normalise the keys
     flist_norm = map(lambda pair: [map_to_keys(pair[0]), pair[1].strip()],
