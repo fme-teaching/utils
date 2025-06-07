@@ -22,7 +22,7 @@ def map_to_keys(field):
          'tools used': 'course_tools',
          'webpage': 'course_webpage',
          'year/level': 'course_year_level',
-         'reviewed': 'reviewed'
+         'reviewed': 'course_reviewed'
          }
     if field not in d:
         d[field] = ''
