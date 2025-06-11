@@ -60,7 +60,26 @@ def standardise_keyword(word):
     to do so that keywords are uniform. For example, 'hoare logic' and
     'Hoare logic' are both mapped to 'Hoare Logic'.
     """
+    # Step 1: Title-case for general formatting
     new_word = word.strip().title()
+
+    # Step 2: Custom replacements (case-insensitive)
+    replacements = {
+        r'\bMcrl2\b': 'mCRL2',
+        r'\bOcl\b': 'OCL',
+        r'\bUml\b': 'UML',
+        r'\bJml\b': 'JML',
+        r'\bLtl\b': 'LTL',
+        r'\bCtl\b': 'CTL',
+        r'\bSmt\b': 'SMT',
+        r'\bSat\b': 'SAT',
+        # Add more replacements as needed
+        # r'\bZ3\b': 'Z3',
+    }
+
+    for pattern, replacement in replacements.items():
+        new_word = re.sub(pattern, replacement, new_word, flags=re.IGNORECASE)
+   
     return new_word
 
 
