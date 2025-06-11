@@ -73,6 +73,8 @@ def standardise_keyword(word):
         r'\bCtl\b': 'CTL',
         r'\bSmt\b': 'SMT',
         r'\bSat\b': 'SAT',
+        r'\bPvs\b': 'PVS',
+        r'\bNuxmv\b': 'nuXmv',
         # Add more replacements as needed
         # r'\bZ3\b': 'Z3',
     }
